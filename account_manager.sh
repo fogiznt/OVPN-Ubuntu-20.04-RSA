@@ -73,13 +73,14 @@ dev tun
 proto udp
 remote $ip 443
 
-cipher AES-256-CBC
 persist-key
 persist-tun
 
-comp-lzo adaptive
+compress lz4-v2
 remote-cert-tls server
-auth SHA512
+cipher AES-128-GCM
+auth MD5
+
 ignore-unknown-option block-outside-dns
 block-outside-dns
 nobind

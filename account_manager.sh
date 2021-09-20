@@ -105,7 +105,7 @@ ifconfig-push $local_ip 255.255.255.0
 EOF
 cd /etc/openvpn/clients/$username/
 zip $username.zip -P $password  $username.ovpn
-cp /etc/openvpn/clients/$username/$username.zip /root/clients/
+cp /etc/openvpn/clients/$username/$username.zip /home/clients/
 cd /var/www/html/clients/
 cp /etc/openvpn/clients/$username/$username.zip .
 echo "${GREEN} Учётная запись добавлена${DEFAULT}";;

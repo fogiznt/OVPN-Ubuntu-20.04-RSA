@@ -28,7 +28,8 @@ cert server.crt
 key server.key
 dh dh.pem
 
-auth SHA512
+cipher AES-128-GCM
+auth MD5
 tls-crypt tls.key 
 tls-server
 
@@ -36,18 +37,19 @@ topology subnet
 client-to-client
 client-config-dir ccd
 
-push "redirect-gateway def1"
+push "redirect-gateway def1 bypass-dhcp"
 push "dhcp-option DNS 1.1.1.1"
+push "dhcp-option DNS 1.0.0.1"
 
 sndbuf 524288
 rcvbuf 524288
 push "sndbuf 524288"
 push "rcvbuf 524288"
-comp-lzo
+compress lz4-v2
 tun-mtu 1420
 
-cipher AES-256-CBC
-keepalive 10 20
+
+keepalive 10 60
 persist-key
 persist-tun
 
@@ -86,4 +88,3 @@ EOF
 cd ~
 wget https://raw.githubusercontent.com/fogiznt/openvpn_ubuntu20.04_tls/main/account_manager.sh?token=AUNZ56K6OD5QGNETVXLU5U3BJAH4G
 chmod +x account_manager.sh
-

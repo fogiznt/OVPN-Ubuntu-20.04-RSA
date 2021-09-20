@@ -76,7 +76,7 @@ remote $ip 443
 persist-key
 persist-tun
 
-compress lz4-v2
+comp-lzo yes
 remote-cert-tls server
 cipher AES-128-GCM
 auth MD5

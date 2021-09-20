@@ -84,6 +84,6 @@ cat >>index.html <<EOF
 </html>
 EOF
 cd ~
-wget https://raw.githubusercontent.com/fogiznt/Ubuntu_20.04_openVPN/main/account_manager.sh
+wget https://raw.githubusercontent.com/fogiznt/openvpn_ubuntu20.04_tls/main/account_manager.sh?token=AUNZ56K6OD5QGNETVXLU5U3BJAH4G
 chmod +x account_manager.sh
 

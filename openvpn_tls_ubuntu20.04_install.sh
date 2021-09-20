@@ -30,7 +30,8 @@ dh dh.pem
 
 cipher AES-128-GCM
 auth MD5
-tls-crypt tls.key 
+
+tls-crypt tls.key
 tls-server
 
 topology subnet
@@ -45,7 +46,8 @@ sndbuf 524288
 rcvbuf 524288
 push "sndbuf 524288"
 push "rcvbuf 524288"
-compress lz4-v2
+comp-lzo
+#push "compress lzo"
 tun-mtu 1420
 
 

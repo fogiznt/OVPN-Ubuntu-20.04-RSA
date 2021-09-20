@@ -69,7 +69,7 @@ echo net.ipv4.ip_forward=1 >> /etc/sysctl.conf
 apt install iptables-persistent -y
 netfilter-persistent save
 apt install apache2 zip -y
-
+mkdir /root/clients
 cd /var/www/html/
 mkdir clients
 rm index.html

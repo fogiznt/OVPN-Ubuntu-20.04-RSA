@@ -44,21 +44,21 @@ cd /usr/share/easy-rsa/
 echo "Генерация сертификатов: "
 
 ./easyrsa init-pki >&- 2>&-
-echo -n "              CA "
+echo -n "               CA "
 export EASYRSA_BATCH=1
 ./easyrsa build-ca nopass >&- 2>&-
 cp pki/ca.crt /etc/openvpn/
 if ! [ -f /etc/openvpn/ca.crt ];then echo "${RED}ОШИБКА, сертификат CA не сгенерирован, выход из программы${DEFAULT}" exit;else echo "${GREEN}OK${DEFAULT}";fi
 
-echo -n "              Сертификат сервера "
+echo -n "               Сертификат сервера "
 ./easyrsa build-server-full server nopass >&- 2>&-
 cp pki/private/server.key /etc/openvpn
 cp pki/issued/server.crt /etc/openvpn
 if ! [ -f /etc/openvpn/server.key ];then echo "${RED}ОШИБКА, сертификат сервера не сгенерирован, выход из программы${DEFAULT}" exit;else echo "${GREEN}OK${DEFAULT}"; fi
-echo -n "              Ключ сервера "
+echo -n "               Ключ сервера "
 if ! [ -f /etc/openvpn/server.crt ];then echo "${RED}ОШИБКА, ключ сервера не сгенерирован, выход из программы${DEFAULT}" exit;else echo "${GREEN}OK${DEFAULT}";fi
 
-echo -n "              Ключи Диффи-Хеллмана "
+echo -n "               Ключи Диффи-Хеллмана "
 ./easyrsa gen-dh >&- 2>&-
 cp pki/dh.pem /etc/openvpn
 if ! [ -f /etc/openvpn/dh.pem ];then echo "${RED}ОШИБКА, ключи Диффи-Хеллмана не сгенерированы, выход из программы${DEFAULT}" exit;else echo "${GREEN}OK${DEFAULT}";fi

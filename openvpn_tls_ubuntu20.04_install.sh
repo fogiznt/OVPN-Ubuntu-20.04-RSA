@@ -4,67 +4,67 @@ GREEN='\033[1;32m'
 BLUE='\033[1;34m'
 DEFAULT='\033[0m'
 
-echo "${GREEN}  ____                     _   __   ___    _  __                      ";
-echo " / __ \   ___  ___   ___  | | / /  / _ \  / |/ /                      ";
-echo "/ /_/ /  / _ \/ -_) / _ \ | |/ /  / ___/ /    /                       ";
-echo "\____/  / .__/\__/ /_//_/ |___/  /_/    /_/|_/                        ";
-echo "       /_/                                                            ";
-echo "  __  __   __               __               ___   ___      ___   ____";
-echo " / / / /  / /  __ __  ___  / /_ __ __       |_  | / _ \    / _ \ / / /";
-echo "/ /_/ /  / _ \/ // / / _ \/ __// // /      / __/ / // / _ / // //_  _/";
-echo "\____/  /_.__/\_,_/ /_//_/\__/ \_,_/      /____/ \___/ (_)\___/  /_/  ";
-echo "                                                                      ${DEFAULT}";
+echo -e "${GREEN}  ____                     _   __   ___    _  __                      ";
+echo -e " / __ \   ___  ___   ___  | | / /  / _ \  / |/ /                      ";
+echo -e "/ /_/ /  / _ \/ -_) / _ \ | |/ /  / ___/ /    /                       ";
+echo -e "\____/  / .__/\__/ /_//_/ |___/  /_/    /_/|_/                        ";
+echo -e "       /_/                                                            ";
+echo -e "  __  __   __               __               ___   ___      ___   ____";
+echo -e " / / / /  / /  __ __  ___  / /_ __ __       |_  | / _ \    / _ \ / / /";
+echo -e "/ /_/ /  / _ \/ // / / _ \/ __// // /      / __/ / // / _ / // //_  _/";
+echo -e "\____/  /_.__/\_,_/ /_//_/\__/ \_,_/      /____/ \___/ (_)\___/  /_/  ";
+echo -e "                                                                      ${DEFAULT}";
 
-echo -n "${GREEN}Обновление пакетов ${DEFAULT}" & echo $(apt update 2>/dev/null | grep packages | cut -d '.' -f 1)
-echo "Установка пакетов: "
+echo -n -e "${GREEN}Обновление пакетов ${DEFAULT}" & echo $(apt update 2>/dev/null | grep packages | cut -d '.' -f 1)
+echo -e "Установка пакетов: "
 
-echo -n "               openvpn " & echo -n $(apt install openvpn -y >&- 2>&-)
-if [ "$(dpkg --get-selections openvpn | awk '{print $2}')" = "install" ]; then echo "${GREEN}OK${DEFAULT}"; else echo "${RED}ОШИБКА, попробуйте установить данный пакет самостоятельно -${GREEN} apt install openvpn ${DEFAULT}" ;fi
+echo -n -e "               openvpn " & echo -n $(apt install openvpn -y >&- 2>&-)
+if [ "$(dpkg --get-selections openvpn | awk '{print $2}')" = "install" ]; then echo -e "${GREEN}OK${DEFAULT}"; else echo -e "${RED}ОШИБКА, попробуйте установить данный пакет самостоятельно -${GREEN} apt install openvpn ${DEFAULT}" ;fi
 
-echo -n "               easy-rsa " & echo -n $(apt install easy-rsa -y >&- 2>&-)
-if [ "$(dpkg --get-selections easy-rsa | awk '{print $2}')" = "install" ]; then echo "${GREEN}OK${DEFAULT}"; else echo "${RED}ОШИБКА, попробуйте установить данный пакет самостоятельно -${GREEN} apt install easy-rsa ${DEFAULT}" ;fi
+echo -n -e "               easy-rsa " & echo -n $(apt install easy-rsa -y >&- 2>&-)
+if [ "$(dpkg --get-selections easy-rsa | awk '{print $2}')" = "install" ]; then echo -e "${GREEN}OK${DEFAULT}"; else echo -e "${RED}ОШИБКА, попробуйте установить данный пакет самостоятельно -${GREEN} apt install easy-rsa ${DEFAULT}" ;fi
 
-echo -n "               curl " & echo -n $(apt install curl -y >&- 2>&-)
-if [ "$(dpkg --get-selections curl | awk '{print $2}')" = "install" ]; then echo "${GREEN}OK${DEFAULT}"; else echo "${RED}ОШИБКА, попробуйте установить данный пакет самостоятельно -${GREEN} apt install curl ${DEFAULT}" ;fi
+echo -n -e "               curl " & echo -n $(apt install curl -y >&- 2>&-)
+if [ "$(dpkg --get-selections curl | awk '{print $2}')" = "install" ]; then echo -e "${GREEN}OK${DEFAULT}"; else echo -e "${RED}ОШИБКА, попробуйте установить данный пакет самостоятельно -${GREEN} apt install curl ${DEFAULT}" ;fi
 
-echo -n "               iptables-persistent "
+echo -n -e "               iptables-persistent "
 echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections
 echo iptables-persistent iptables-persistent/autosave_v6 boolean true | sudo debconf-set-selections
 apt install iptables-persistent -y >&- 2>&-
-if [ "$(dpkg --get-selections iptables-persistent | awk '{print $2}')" = "install" ]; then echo "${GREEN}OK${DEFAULT}"; else echo "${RED}ОШИБКА, попробуйте установить данный пакет самостоятельно -${GREEN} apt install iptables-persistent ${DEFAULT}" ;fi
+if [ "$(dpkg --get-selections iptables-persistent | awk '{print $2}')" = "install" ]; then echo -e "${GREEN}OK${DEFAULT}"; else echo -e "${RED}ОШИБКА, попробуйте установить данный пакет самостоятельно -${GREEN} apt install iptables-persistent ${DEFAULT}" ;fi
 
-echo -n "               apache2 " & echo -n $(apt install apache2 -y >&- 2>&-)
-if [ "$(dpkg --get-selections apache2 | awk '{print $2}')" = "install" ]; then echo "${GREEN}OK${DEFAULT}"; else echo "${RED}ОШИБКА, попробуйте установить данный пакет самостоятельно -${GREEN} apt install apache2 ${DEFAULT}" ;fi
+echo -n -e "               apache2 " & echo -n $(apt install apache2 -y >&- 2>&-)
+if [ "$(dpkg --get-selections apache2 | awk '{print $2}')" = "install" ]; then echo -e "${GREEN}OK${DEFAULT}"; else echo -e "${RED}ОШИБКА, попробуйте установить данный пакет самостоятельно -${GREEN} apt install apache2 ${DEFAULT}" ;fi
 
-echo -n "               zip " & echo -n $(apt install zip -y >&- 2>&-)
-if [ "$(dpkg --get-selections zip | awk '{print $2}')" = "install" ]; then echo "${GREEN}OK${DEFAULT}"; else echo "${RED}ОШИБКА, попробуйте установить данный пакет самостоятельно -${GREEN} apt install zip ${DEFAULT}" ;fi
+echo -n -e "               zip " & echo -n $(apt install zip -y >&- 2>&-)
+if [ "$(dpkg --get-selections zip | awk '{print $2}')" = "install" ]; then echo -e "${GREEN}OK${DEFAULT}"; else echo -e "${RED}ОШИБКА, попробуйте установить данный пакет самостоятельно -${GREEN} apt install zip ${DEFAULT}" ;fi
 
 cd /usr/share/easy-rsa/
 
-echo "Генерация сертификатов: "
+echo -e "Генерация сертификатов: "
 
 ./easyrsa init-pki >&- 2>&-
 echo -n "               CA "
 export EASYRSA_BATCH=1
 ./easyrsa build-ca nopass >&- 2>&-
 cp pki/ca.crt /etc/openvpn/
-if ! [ -f /etc/openvpn/ca.crt ];then echo "${RED}ОШИБКА, сертификат CA не сгенерирован, выход из программы${DEFAULT}" exit;else echo "${GREEN}OK${DEFAULT}";fi
+if ! [ -f /etc/openvpn/ca.crt ];then echo -e "${RED}ОШИБКА, сертификат CA не сгенерирован, выход из программы${DEFAULT}" exit;else echo -e "${GREEN}OK${DEFAULT}";fi
 
-echo -n "               Сертификат сервера "
+echo -n -e "               Сертификат сервера "
 ./easyrsa build-server-full server nopass >&- 2>&-
 cp pki/private/server.key /etc/openvpn
 cp pki/issued/server.crt /etc/openvpn
-if ! [ -f /etc/openvpn/server.key ];then echo "${RED}ОШИБКА, сертификат сервера не сгенерирован, выход из программы${DEFAULT}" exit;else echo "${GREEN}OK${DEFAULT}"; fi
-echo -n "               Ключ сервера "
-if ! [ -f /etc/openvpn/server.crt ];then echo "${RED}ОШИБКА, ключ сервера не сгенерирован, выход из программы${DEFAULT}" exit;else echo "${GREEN}OK${DEFAULT}";fi
+if ! [ -f /etc/openvpn/server.key ];then echo -e "${RED}ОШИБКА, сертификат сервера не сгенерирован, выход из программы${DEFAULT}" exit;else echo -e "${GREEN}OK${DEFAULT}"; fi
+echo -n -e "               Ключ сервера "
+if ! [ -f /etc/openvpn/server.crt ];then echo -e "${RED}ОШИБКА, ключ сервера не сгенерирован, выход из программы${DEFAULT}" exit;else echo -e "${GREEN}OK${DEFAULT}";fi
 
-echo -n "               Ключи Диффи-Хеллмана "
+echo -n -e "               Ключи Диффи-Хеллмана "
 ./easyrsa gen-dh >&- 2>&-
 cp pki/dh.pem /etc/openvpn
-if ! [ -f /etc/openvpn/dh.pem ];then echo "${RED}ОШИБКА, ключи Диффи-Хеллмана не сгенерированы, выход из программы${DEFAULT}" exit;else echo "${GREEN}OK${DEFAULT}";fi
+if ! [ -f /etc/openvpn/dh.pem ];then echo -e "${RED}ОШИБКА, ключи Диффи-Хеллмана не сгенерированы, выход из программы${DEFAULT}" exit;else echo -e "${GREEN}OK${DEFAULT}";fi
 openvpn --genkey --secret /etc/openvpn/tls.key
 
-echo -n "${DEFAULT}Настройка и запуск OpenVPN сервера "
+echo -n -e "${DEFAULT}Настройка и запуск OpenVPN сервера "
 
 cd /etc/openvpn
 cat >>server.conf <<EOF
@@ -114,21 +114,21 @@ touch /etc/openvpn/passwords
 
 systemctl start openvpn@server
 if ! [ "$(systemctl status openvpn@server | grep -o "running" )" = "running" ]; then
-echo "${RED}ОШИБКА, Openvpn сервер не запустился, выход из программы. \n Вы можете посмотреть логи сервер - cat /etc/openvpn/log.log или systemctl status openvpn@server${DEFAULT}"
+echo -e "${RED}ОШИБКА, Openvpn сервер не запустился, выход из программы. \n Вы можете посмотреть логи сервер - cat /etc/openvpn/log.log или systemctl status openvpn@server${DEFAULT}"
 else
-echo "${GREEN}сервер запущен${DEFAULT}"
+echo -e "${GREEN}сервер запущен${DEFAULT}"
 fi
 
-echo -n "Настройка фаерволла iptables "
+echo -n -e "Настройка фаерволла iptables "
 ip=$(curl check-host.net/ip) >&- 2>&-
 #ip=$(hostname -i)
-echo "${GREEN}SNAT 10.8.8.0/24 -------> $ip ${DEFAULT}"
+echo -e "${GREEN}SNAT 10.8.8.0/24 -------> $ip ${DEFAULT}"
 iptables -t nat -A POSTROUTING -s 10.8.8.0/24 -j SNAT --to-source $ip
 echo 1 > /proc/sys/net/ipv4/ip_forward
 echo net.ipv4.ip_forward=1 >> /etc/sysctl.conf
 netfilter-persistent save >&- 2>&-
 
-echo -n "Настройка web-сервера apache2 "
+echo -n -e "Настройка web-сервера apache2 "
 cd /var/www/html/
 mkdir clients
 rm index.html
@@ -283,19 +283,19 @@ FOE
 chmod +x account_manager.sh
 
 if ! [ "$(systemctl status apache2 | grep -o "running" )" = "running" ]; then
-echo "${RED}- не критичная ошибка,web-сервер не запустился, все ваши файлы для подключения будут лежать в /var/www/html/clients${DEFAULT}"
+echo -e "${RED}- не критичная ошибка,web-сервер не запустился, все ваши файлы для подключения будут лежать в /var/www/html/clients${DEFAULT}"
 else
-echo "${GREEN}завершена.\nУстановка OpenVPN сервера завершена.${DEFAULT}"
+echo -e "${GREEN}завершена.\nУстановка OpenVPN сервера завершена.${DEFAULT}"
 fi
 
-echo "${GREEN}   ____             __          __   __                                __       __           __";
-echo "  /  _/  ___   ___ / /_ ___ _  / /  / /      ____ ___   __ _    ___   / / ___  / /_ ___  ___/ /";
-echo " _/ /   / _ \ (_-</ __// _ \`/ / /  / /      / __// _ \ /  ' \  / _ \ / / / -_)/ __// -_)/ _  / ";
-echo "/___/  /_//_//___/\__/ \_,_/ /_/  /_/       \__/ \___//_/_/_/ / .__//_/  \__/ \__/ \__/ \_,_/  ";
-echo "                                                             /_/                               ";
-echo "                                                                                               ${DEFAULT}";
+echo -e "${GREEN}   ____             __          __   __                                __       __           __";
+echo -e "  /  _/  ___   ___ / /_ ___ _  / /  / /      ____ ___   __ _    ___   / / ___  / /_ ___  ___/ /";
+echo -e " _/ /   / _ \ (_-</ __// _ \`/ / /  / /      / __// _ \ /  ' \  / _ \ / / / -_)/ __// -_)/ _  / ";
+echo -e "/___/  /_//_//___/\__/ \_,_/ /_/  /_/       \__/ \___//_/_/_/ / .__//_/  \__/ \__/ \__/ \_,_/  ";
+echo -e "                                                             /_/                               ";
+echo -e "                                                                                               ${DEFAULT}";
 
-echo "${GREEN}Основные параметры сервера
+echo -e "${GREEN}Основные параметры сервера
 public ip - $ip	    cipher - AES-256-CBC
 proto - udp4                    tls-crypt - enable
 port - 443                      tls version - 1.3

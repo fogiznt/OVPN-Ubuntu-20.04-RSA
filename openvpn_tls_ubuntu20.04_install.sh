@@ -119,7 +119,6 @@ else
 echo -e "${GREEN}сервер запущен${DEFAULT}"
 fi
 
-echo -n -e "Настройка фаерволла iptables "
 ip=$(curl check-host.net/ip) >&- 2>&-
 #ip=$(hostname -i)
 echo -e "${GREEN}SNAT 10.8.8.0/24 -------> $ip ${DEFAULT}"
@@ -285,7 +284,7 @@ chmod +x account_manager.sh
 if ! [ "$(systemctl status apache2 | grep -o "running" )" = "running" ]; then
 echo -e "${RED}- не критичная ошибка,web-сервер не запустился, все ваши файлы для подключения будут лежать в /var/www/html/clients${DEFAULT}"
 else
-echo -e "${GREEN}завершена.\nУстановка OpenVPN сервера завершена.${DEFAULT}"
+echo -e "${GREEN}завершена.${DEFAULT}"
 fi
 
 echo -e "${GREEN}   ____             __          __   __                                __       __           __";

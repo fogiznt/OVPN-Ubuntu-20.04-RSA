@@ -1,9 +1,9 @@
 Установка OpenVPN на Ubuntu 20.04
 ``` 
 cd ~
-wget https://raw.githubusercontent.com/fogiznt/OVPN-Ubuntu-20.04-RSA/main/openvpn_tls_ubuntu20.04_install.sh
-chmod +x openvpn_tls_ubuntu20.04_install.sh
-./openvpn_tls_ubuntu20.04_install.sh
+https://raw.githubusercontent.com/fogiznt/OVPN-Ubuntu-20.04-RSA/main/openvpn-install.sh -O openvpn-install.sh
+chmod +x openvpn-install.sh
+./openvpn-install.sh
 ```
 
 Добавление пользователей  

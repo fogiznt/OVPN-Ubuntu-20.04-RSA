@@ -76,10 +76,10 @@ ca ca.crt
 cert server.crt
 key server.key
 dh dh.pem
-cipher AES-256-CBC
+cipher AES-256-GCM
 auth SHA512
 
-tls-version-min 1.3
+tls-version-min 1.2
 tls-cipher TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384
 tls-crypt tls.key
 tls-server
@@ -148,7 +148,7 @@ touch account_manager.sh
 cat >account_manager.sh <<FOE
 #!/bin/sh
 RED='\033[37;0;31m'
-GREEN='\033[0;32;4m'
+GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 DEFAULT='\033[0m'
 
@@ -156,14 +156,14 @@ f=1
 while f=1
 do
 echo "\n\${RED}Настройка пользователей VPN\nВыберите действие\${DEFAULT}
-\${GREEN}                                      \${DEFAULT}
-\${BLUE}1 - Список учётных записей VPN        \033[0;32m|\${DEFAULT}
-\${BLUE}2 - Список подключённых пользователей \033[0;32m|\${DEFAULT}
-\${BLUE}3 - Пароли от архивов                 \033[0;32m|\${DEFAULT}
-\${BLUE}4 - Добавить учётную запись           \033[0;32m|\${DEFAULT}
-\${BLUE}5 - Удалить учётную запись            \033[0;32m|\${DEFAULT}
-\${BLUE}6 - Выйти из программы\${DEFAULT}                \033[0;32m|\${DEFAULT}
-\${GREEN}                                      |\${DEFAULT}"
+\${GREEN}---------------------------------------\${DEFAULT}
+1 - Список учётных записей VPN        \033[0;32m|\${DEFAULT}
+2 - Список подключённых пользователей \033[0;32m|\${DEFAULT}
+3 - Пароли от архивов                 \033[0;32m|\${DEFAULT}
+4 - Добавить учётную запись           \033[0;32m|\${DEFAULT}
+5 - Удалить учётную запись            \033[0;32m|\${DEFAULT}
+6 - Выйти из программы\${DEFAULT}                \033[0;32m|\${DEFAULT}
+\${GREEN}---------------------------------------|\${DEFAULT}"
 read value
 case "\$value" in
 1) echo "\${RED}Список учётных записей для подключения:\${DEFAULT}"
@@ -176,7 +176,7 @@ grep -H -o "10.8.8.*" /etc/openvpn/ccd/* | cut -b 18-60
 fi;;
 2)
 val=\$(cat /etc/openvpn/status.log | grep 10.8.8)
-echo "\${RED}Список подключёных пользователей:\${DEFAULT}"
+echo "\${GREEN}Список подключёных пользователей:\${DEFAULT}"
 if [ "\$val" = "" ];
 then
 echo "\${GREEN}Нет подключённых пользователей\${DEFAULT}"
@@ -185,7 +185,7 @@ echo "\${GREEN}Локальный ip,учётка,ip адрес пользова
 cat /etc/openvpn/status.log | grep 10.8.8
 fi;;
 
-4) echo "\${RED}Добавление учётной запсиси\${DEFAULT}\nВведите имя учётной записи"
+4) echo "\${GREEN}Добавление учётной запсиси\${DEFAULT}\nВведите имя учётной записи"
 read username
 echo "\${RED}Введите пароль\${DEFAULT}"
 read password
@@ -201,7 +201,7 @@ fi
 read local_ip
 cd /etc/openvpn/
 touch passwords
-cat >passwords <<EOF
+cat >>passwords <<EOF
 \$username \$password
 EOF
 
@@ -221,7 +221,7 @@ dev tun
 proto udp
 remote \$ip 443
 
-cipher AES-256-CBC
+cipher AES-256-GCM
 auth SHA512
 
 persist-key
@@ -257,7 +257,7 @@ cd /var/www/html/clients/
 mv /etc/openvpn/clients/\$username.zip .
 echo "\${GREEN} Учётная запись добавлена\${DEFAULT}";;
 
-5) echo "\${RED}Удаление учётной записи\${DEFAULT}\nВведите имя учётной записи"
+5) echo "\${GREEN}Удаление учётной записи\${DEFAULT}\nВведите имя учётной записи"
 read username
 if  [ -e /etc/openvpn/ccd/\$username ];
 then
@@ -272,7 +272,7 @@ rm /usr/share/easy-rsa/pki/reqs/\$username.req
 else
 echo "\${RED}Неправильно введено имя учётной записи\${DEFAULT}"
 fi;;
-3)echo "\${RED}Логин/пароль от архива\${DEFAULT}"
+3)echo "\${GREEN}Логин/пароль от архива\${DEFAULT}"
 cat /etc/openvpn/passwords;;
 6)echo "\${GREEN} Выход из программы\${DEFAULT}"
 exit;;
@@ -295,9 +295,9 @@ echo -e "                                                             /_/       
 echo -e "                                                                                               ${DEFAULT}";
 
 echo -e "${GREEN}Основные параметры сервера
-public ip - $ip	    cipher - AES-256-CBC
+public ip - $ip	  cipher - AES-256-GCM
 proto - udp4                    tls-crypt - enable
-port - 443                      tls version - 1.3
+port - 443                      tls version - 1.2
 ip in VPN network - 10.8.8.1    tls-cipher - TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384
 DNS for clients - 8.8.8.8       auth - SHA512
 mode - tun                      key-size - 256

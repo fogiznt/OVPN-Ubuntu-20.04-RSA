@@ -295,10 +295,9 @@ echo -e "                                                             /_/       
 echo -e "                                                                                               ${DEFAULT}";
 
 echo -e "${GREEN}Основные параметры сервера
-public ip - $ip	  cipher - AES-256-GCM
+public ip - $ip	 cipher - AES-256-GCM
 proto - udp4                    tls-crypt - enable
 port - 443                      tls version - 1.2
-ip in VPN network - 10.8.8.1    tls-cipher - TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384
-DNS for clients - 8.8.8.8       auth - SHA512
-mode - tun                      key-size - 256
-tun-mtu - 1500                  key-method - 2${DEFAULT}"
+ip in VPN network - 10.8.8.1    DNS for clients - 8.8.8.8       
+auth - SHA512                   mode - tun                      
+key-size - 256                  key-method - 2${DEFAULT}"               

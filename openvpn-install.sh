@@ -76,7 +76,8 @@ ca ca.crt
 cert server.crt
 key server.key
 dh dh.pem
-cipher AES-256-GCM
+cipher AES-128-GCM
+ncp-ciphers AES-128-GCM
 auth SHA512
 
 tls-version-min 1.2
